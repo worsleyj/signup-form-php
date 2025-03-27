@@ -18,11 +18,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } elseif($password != $password_confirm) {
             echo "Passwords do not match <br>";
         } else {
+            // hash the password (never store raw passwords)
+            $password_hashed = password_hash($password, PASSWORD_DEFAULT);
+            
             // sanitize for safe output, preventing cross site scripting. SQL injection would be prevented using prepared statements with PDO (simulated below).
             $email = htmlspecialchars($email);
             $username = htmlspecialchars($username);
-            // hash the password (never store raw passwords)
-            $password_hashed = password_hash($password, PASSWORD_DEFAULT);
+
 
             // after sanitization, validation, and hashing, simulate inserting the user into the database (commented out due to lack of database)
 
