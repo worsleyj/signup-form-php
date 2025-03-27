@@ -1,9 +1,10 @@
 <?php
+    // sanitizes the input data, preventing cross site scripting. sql injection is covered by the use of PDO in the insert statement
     $email = htmlspecialchars(trim($_POST["email"]));
     $username = htmlspecialchars(trim($_POST["username"]));
     $password = htmlspecialchars(trim($_POST["password"]));
     $password_confirm = htmlspecialchars(trim($_POST["password_confirm"]));
-    
+
     if(empty($email) || empty($username) || empty($password) || empty($password_confirm)) {
         echo "All fields are required <br>";
         } elseif(strlen($password) < 6) {
