@@ -1,10 +1,12 @@
 <?php
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // sanitizes the input data, preventing cross site scripting. sql injection is covered by the use of PDO in the insert statement
     $email = htmlspecialchars(trim($_POST["email"]));
     $username = htmlspecialchars(trim($_POST["username"]));
-    $password = htmlspecialchars(trim($_POST["password"]));
-    $password_confirm = htmlspecialchars(trim($_POST["password_confirm"]));
+    $password = trim($_POST["password"]);
+    $password_confirm = trim($_POST["password_confirm"]);
 
+    // validate if any fields are empty, if password is less than 6 characters, and if password and confirm password match
     if(empty($email) || empty($username) || empty($password) || empty($password_confirm)) {
         echo "All fields are required <br>";
         } elseif(strlen($password) < 6) {
@@ -12,11 +14,11 @@
         } elseif($password != $password_confirm) {
             echo "Passwords do not match <br>";
         } else {
-            echo "Email: $email <br>";
-            echo "Username: $username <br>";
-            echo "Password: $password <br>";
-            echo "Confirm Password: $password_confirm <br>";
+            $password_hashed = password_hash($password, PASSWORD_DEFAULT);
+            echo "Sign up for $username ($email) successful.<br>";
+            echo "Password: $password_hashed <br>";
         }
+    }
 ?>
 
 <!DOCTYPE html>
