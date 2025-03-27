@@ -1,3 +1,23 @@
+<?php
+    $email = htmlspecialchars(trim($_POST["email"]));
+    $username = htmlspecialchars(trim($_POST["username"]));
+    $password = htmlspecialchars(trim($_POST["password"]));
+    $password_confirm = htmlspecialchars(trim($_POST["password_confirm"]));
+    
+    if(empty($email) || empty($username) || empty($password) || empty($password_confirm)) {
+        echo "All fields are required <br>";
+        } elseif(strlen($password) < 6) {
+            echo "Password must be at least 6 characters long <br>";
+        } elseif($password != $password_confirm) {
+            echo "Passwords do not match <br>";
+        } else {
+            echo "Email: $email <br>";
+            echo "Username: $username <br>";
+            echo "Password: $password <br>";
+            echo "Confirm Password: $password_confirm <br>";
+        }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,15 +43,3 @@
     </form>
 </body>
 </html>
-
-<?php
-    $email = $_POST['email'];
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $password_confirm = $_POST['password_confirm'];
-
-    echo "Email: $email <br>";
-    echo "Username: $username <br>";
-    echo "Password: $password <br>";
-    echo "Confirm Password: $password_confirm <br>";
-?>
