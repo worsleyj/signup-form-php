@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <title>Sign Up</title>
 </head>
 <body>
-    <form action="index.php" method="post">
+    <form action="signup.php" method="post">
         <label>Email</label>
         <input type="text" name="email">
         <br>
